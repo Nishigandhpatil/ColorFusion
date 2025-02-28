@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "styleSheet" href="color.css">
+    <title>Document</title>
+</head>
+<body>
+    <section>
+        <div>
+    <button id = "btn1">color 1</button>
+    <button id = "btn2">color 2</button>
+        </div>
+        <h2>Copy your code here</h2>
+        <div class = "CopyCode">
+         background-image : linear-gradient(to right , rgb(92 , 145 , 229), rgb(152, 63 , 198));
+        </div>
+    </section>
+    <script>
+        // getting access of all elemets in script.
+        let Btn1 = document.getElementById("btn1");
+        let Btn2 = document.getElementById("btn2");
+        let copyDiv = document.querySelector(".CopyCode");
+        let rgb1 = "#000";
+        let rgb2 = "#fff";
+
+              
+        
+        const hexvalues = () =>{
+        let hexChar ="0123456789ABCDEF";
+        let colors = "#";
+        for(let i =0 ; i<6 ; i++){
+            colors += hexChar[Math.floor(Math.random()*16)] ; 
+        }
+        return colors;
+        }
+        
+
+        const generateHexColor = () => {
+            let hexChars = "0123456789ABCDEF";
+            let color = "#";
+            for (let i = 0; i < 6; i++) {
+                color += hexChars[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        };
+        
+        const updateGradient = () =>{
+            document.body.style.backgroundImage = `linear-gradient(to right , ${rgb1}, ${rgb2})`;
+            copyDiv.innerHTML =  `background-image : linear-gradient(to right , ${rgb1}, ${rgb2})`;
+        }       
+        
+
+        const handleButton1 = () =>{
+            rgb1 = hexvalues();
+        //    console.log(rgb1);
+           Btn1.innerText = rgb1
+           Btn1.style.backgroundColor = rgb1;
+           updateGradient();
+        }
+
+        const handleButton2 = () =>{
+              rgb2 = hexvalues();
+            // console.log(rgb2);
+            Btn2.innerText = rgb2;
+            Btn2.style.backgroundColor = rgb2;
+            updateGradient();     
+         }
+
+        
+        Btn1.addEventListener('click' , handleButton1);
+        Btn2.addEventListener('click' , handleButton2);
+
+        copyDiv.addEventListener('click' , ()=>{
+            navigator.clipboard.writeText(copyDiv.innerText)
+            .then(() => alert("Copied to clipboard!"))
+            .catch(err => console.error("Failed to copy:", err));
+        });
+        
+        Btn1.innerText = rgb1;
+        Btn1.style.backgroundColor = rgb1;
+        Btn2.innerText = rgb2;
+        Btn2.style.backgroundColor = rgb2;
+        updateGradient();
+    </script>
+</body>
+</html>
